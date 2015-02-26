@@ -6,9 +6,10 @@ require_relative 'response'
 
 
 class Mastermind
-	attr_reader :secret
+	attr_accessor :secret
+
 	def initialize
-		@secret = "BBGB"
+		@secret = secret  
 	end
 
   def execute(input)
@@ -21,25 +22,29 @@ class Mastermind
   end
 
 	def evaluate_guess(guess)
-		# count = 0
-		# until count == 10
-			guess = guess.chars
-			answer = @secret.chars
-			common = (guess & answer)
-			num = common.length
-			puts "There are #{num} colors in common: #{common} "
-		# end
-		
+		colors_correct = correct_elements(guess)
+		positions_correct = correct_position(guess)
+		"'#{guess}' have #{colors_correct} correct colors"	
 	end
 
 	def correct_elements(guess)
-		guess.upcase!
-		# answer = @secret.chars
-		# correct_elements = guess.chars{|char| answer.include?(char)}
-		# print correct_elements
+		# answer = @secret
+		# guess.upcase!
+		# count = 0
+		# guess.split("").each do |x|
+		# 	if answer.include?(x)
+		# 		count += 1
+		# 	end
+		# end
+		answer = @secret.split("").map do |x|
+			if guess.include?(x)
+				count += 1
+			end
+		end	
+		count
 	end
 
-	def correct_position(guess)
+	def correct_position(guess)  #works
 		check = @secret.chars
 		correct_position = guess.chars.zip(check)
 		num = correct_position.count do |char|
@@ -49,24 +54,21 @@ class Mastermind
 	end
 
 	def secret  # Works
-	#	scrambled = []
 		colors = ["R", "G", "B", "Y"]
-		scrambled = colors.shuffle!
-		@secret = scrambled.join("") #un-comment this to randomize secret
-
-		# colors = ["R", "G", "B", "Y"]
+		scrambled = colors.map {colors.sample} #Refactored!
 		# colors.length.times do 
 		# 	colors.shuffle!
 		# 	scrambled << colors[0]
-		# end
-	end
-
-		#generate a random sequence of colors
-	def guess_evaluator
+		scrambled.join("")
 	end
 
 end
 
 m = Mastermind.new
-m.correct_position("GGGG")  #BBGB
+# print m.secret
+m.secret = "BBGB"
+puts m.correct_elements("BBBB")
+puts m.correct_elements("BBRB")
+# print m.secret
+# m.correct_position("GGGG")  #BBGB
 # m.evaluate_guess("BBBB")

@@ -1,8 +1,13 @@
 require './lib/mastermind'
+# read
+# Runs everthing / gets tested
+response = Response.new
+response.greeting
+response.menu
 
 class Runner
-  def run
-    puts "Welcome to Mastermind"
+  def run 
+    # puts "Welcome to Mastermind"
 
     mastermind = Mastermind.new
     response = nil
@@ -15,4 +20,10 @@ class Runner
     end
     puts "Goodbye!"
   end
+
 end
+
+Runner.new
+
+
+print secret

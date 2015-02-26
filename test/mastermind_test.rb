@@ -23,15 +23,27 @@ class MastermindTest < Minitest::Test
 	end
 
 	def test_it_counts_number_of_characters_in_the_correct_position  # secret = "BBGB" for this test and similar, I assigend mm.secret to a set string. Acutal implementation will be random
+		mm.secret = "BBGB"
 		assert_equal mm.correct_position("BBGB"), 4
 		assert_equal mm.correct_position("BBBB"), 3
 		assert_equal mm.correct_position("RRRR"), 0
+		mm.secret = "RRRR"
+		assert_equal mm.correct_position("RRRR"), 4
+	end
+
+	def test_i_counts_number_of_colors_correct
+		mm.secret = "BBGB"
+		assert_equal mm.correct_elements("BBGB"), 4
+		assert_equal mm.correct_elements("BBBB"), 3
+		assert_equal mm.correct_elements("RGBY"), 1
+		assert_equal mm.correct_elements("GGGG"), 3
 	end
 
 	def test_it_checks_if_guess_equals_secret
 	end
 
 	def test_it_returns_which_guesses_are_correct  		
+		skip
 		mm.evaluate_guess("GGGG")  # mm.secret = "BBGB"
 	end
 
