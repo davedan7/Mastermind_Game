@@ -39,13 +39,13 @@ class MastermindTest < Minitest::Test
 		assert_equal mm.correct_elements("GGGG"), 1
 	end
 
-	def test_it_checks_if_guess_equals_secret
+	def test_it_returns_a_string_with_number_of_correct_guesses_and_positions
+		mm.secret = "BBGB"
+		assert_equal mm.evaluate_guess("BBGB"), "'BBGB' has 4 correct colors, with 4 in the right position."	
+		assert_equal mm.evaluate_guess("BBRB"), "'BBRB' has 3 correct colors, with 3 in the right position."	
+		assert_equal mm.evaluate_guess("BGBB"), "'BGBB' has 4 correct colors, with 2 in the right position."	
 	end
 
-	def test_it_returns_which_guesses_are_correct  		
-		skip
-		mm.evaluate_guess("GGGG")  # mm.secret = "BBGB"
-	end
 
 
 
