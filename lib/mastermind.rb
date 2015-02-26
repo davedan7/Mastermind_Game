@@ -22,27 +22,39 @@ class Mastermind
   end
 
 	def evaluate_guess(guess)
-		colors_correct = correct_elements(guess)
-		positions_correct = correct_position(guess)
-		"'#{guess}' have #{colors_correct} correct colors"	
+		# colors_correct = correct_elements(guess)
+		# positions_correct = correct_position(guess)
+		# "'#{guess}' have #{colors_correct} correct colors"	
 	end
 
 	def correct_elements(guess)
-		# answer = @secret
-		# guess.upcase!
-		# count = 0
-		# guess.split("").each do |x|
-		# 	if answer.include?(x)
-		# 		count += 1
-		# 	end
-		# end
-		answer = @secret.split("").map do |x|
-			if guess.include?(x)
+		guess.upcase!
+		answer = @secret.split("")
+		count = 0
+		guess.split("").each do |x|  #works!
+			if answer.include?(x)
+				answer.delete_at(answer.index(x))
 				count += 1
 			end
-		end	
+		end
 		count
 	end
+	 # answer.split("").map do |x|
+		# if guess.include?(x)
+		# 	count += 1
+		# end
+	# end	
+		# result = 0
+		# answer = @secret.split("").dup
+		# guess.split("").each do |g|
+		# 	if answer.include?(g)
+		# 		match = answer.find_index(g)
+		# 		answer[match] = nil
+		# 		result += 1
+		# 	end
+		# end
+		# result
+	# end
 
 	def correct_position(guess)  #works
 		check = @secret.chars

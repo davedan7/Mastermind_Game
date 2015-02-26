@@ -35,8 +35,8 @@ class MastermindTest < Minitest::Test
 		mm.secret = "BBGB"
 		assert_equal mm.correct_elements("BBGB"), 4
 		assert_equal mm.correct_elements("BBBB"), 3
-		assert_equal mm.correct_elements("RGBY"), 1
-		assert_equal mm.correct_elements("GGGG"), 3
+		assert_equal mm.correct_elements("RGBY"), 2
+		assert_equal mm.correct_elements("GGGG"), 1
 	end
 
 	def test_it_checks_if_guess_equals_secret
