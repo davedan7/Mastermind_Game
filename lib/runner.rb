@@ -6,28 +6,28 @@ require './lib/menu'
 
 class Runner
 
-  def run 
+	def run 
     puts "Welcome to Mastermind"
 		
 		menu = Menu.new
-
 		until menu.play == true
-			print "Would you like to: (P)lay, read the (I)nstructions, or (Q)uit?"
-			input = gets.chomp
-			menu.evaluate(message)
+			menu.main
+	
+
+			mastermind = Mastermind.new
+			response = nil
+			
+			mastermind.intro
+			until response && response.status == :won
+				print "> "
+				input = gets.chomp
+				response = mastermind.execute(input)
+				puts response.message
+			end
+			puts "Goodbye!"
+
 		end
-
-		mastermind = Mastermind.new
-    response = nil
-
-    until response && response.status == :won
-      print "> "
-      input = gets.chomp
-      response = mastermind.execute(input)
-      puts response.message
-    end
-    puts "Goodbye!"
-  end
+	end
 	
 	
 end
