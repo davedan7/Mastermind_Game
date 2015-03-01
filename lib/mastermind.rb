@@ -1,9 +1,5 @@
 require_relative 'response'
-# evaluate
-# Write methods
-# Output
-# Logic
-
+require 'colorize'
 
 class Mastermind
 	attr_accessor :secret
@@ -12,24 +8,27 @@ class Mastermind
 	def initialize
 		@secret = secret  
 		@response = Response.new(:status => :continue)
+		@count = 0
 	end
 
   def execute(input)
-		if input == secret
+		input.to_s.upcase!
+		if input == @secret
       Response.new(:message => "You Win!", :status => :won)
-			puts "Win"
-		elsif input == 'q'
+		elsif input == 'Q'
 			Response.new(:message => "Bye!", :status => :won)
-		elsif input == 'c'
+		elsif input == 'C'
 			Response.new(:message => "CHEAT! The answer is: #{@secret}!", :status => :continue)
 		elsif input.length > secret.length
 			Response.new(:message => "Too many characters! Guess again!", :status => :continue)
 		elsif input.length < secret.length
 			Response.new(:message => "Not enough characters! Guess again!", :status => :continue)
+		elsif @count == 9
+			Response.new(:message => "Out of guesses! You Lose!", :status => :won)
 		else
 			evaluate_guess(input)
-      Response.new(:message => evaluate_guess(input) + "Guess again!", :status => :continue)
-			puts "Fuck"
+			@count += 1
+			Response.new(:message => evaluate_guess(input) + " You have #{10-@count} guesses remaining. Guess again!", :status => :continue)
 		end
    
   end
@@ -72,34 +71,9 @@ class Mastermind
 		scrambled.join("")
 	end
 
-	def intro
-		response.intro_message
-	end
-
 end
 
-	# def menu
-	# 	@response.menu
-	# 	input = gets.chomp.downcase
-	# 	response = false		
-	# 	until response == true do 
-	# 		case input
-	# 		when "p"
-	# 			response = true
-	# 		when "i"
-	# 			@response.instructions
-	# 			response = true
-	# 		when "q"
-	# 			#quit the game
-	# 			response = true
-	# 		else
-	# 			puts "Incorrect Input"
-	# 			@response.menu
-	# 			menu_eval
-	# 		end
-	# 	end
-	# end
-
+__END__
 mm = Mastermind.new
 mm.secret = "rbgy"
 mm.execute("rbgy")

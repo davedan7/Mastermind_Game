@@ -17,9 +17,13 @@ class MastermindTest < Minitest::Test
 		assert mm.secret.class == String
 	end
 
+	# How can I test that it's actually producing a new secret? 
+	# How could I test that it doesn't just produce 'rgby' in random sequence? (ie, it can have two of one color)
 	def test_it_produces_a_new_secret_each_new_game #There's a small chance these actually will be the same and the test will fail
 		other_game = Mastermind.new
 		assert other_game.secret != mm.secret
+		game3 = Mastermind.new
+		assert game.secret != mm.secret
 	end
 
 	def test_it_counts_number_of_characters_in_the_correct_position  # secret = "BBGB" for this test and similar, I assigend mm.secret to a set string. Acutal implementation will be random
