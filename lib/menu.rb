@@ -23,7 +23,7 @@ class Menu
 		when 'i'
 			instructions
 		when "q"
-			puts "Nobody likes a quitter..."
+			puts "Over before it even started..."
 			@quit = true
 			@play = true
 		else
