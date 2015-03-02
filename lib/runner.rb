@@ -1,6 +1,6 @@
 require './lib/mastermind'
 require './lib/menu'
-# require './lib/response'
+
 
 
 class Runner
@@ -8,9 +8,11 @@ class Runner
 		@mastermind = Mastermind.new ## Logic. Accessable to rest of runner
 	end
 
-	def run 
+	def run
+		system "clear"
+		@mastermind.response.logo
 		@mastermind.response.welcome
-		
+
 		menu = Menu.new
 		until menu.play == true
 			menu.main
@@ -21,13 +23,16 @@ class Runner
 	end
 
 	def run_game
-		# mastermind = Mastermind.new
+		system "clear"
+		@mastermind.response.logo
 		@mastermind.response.intro_message
 		response = nil
-		
+
 		until response && (response.status == :won || response.status == :quit)
 			print "> "
 			input = gets.chomp
+			system "clear"
+			@mastermind.response.logo
 			response = @mastermind.execute(input)
 			puts response.message
 		end
@@ -44,7 +49,7 @@ class Runner
 					closing = true
 				elsif input == 'q'
 					closing = true
-					@mastermind.response.goodbye
+					@mastermind.response.goodbye_block
 				else
 					puts "Incorrect Input"
 				end
@@ -55,7 +60,3 @@ class Runner
 	end
 
 end
-
-
-
-
